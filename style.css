@@ -9,6 +9,7 @@
   --yellow: #f6efc4;     /* カカポの顔の色 */
   --accent: #4a6b22;     /* リンクなどに使う濃い苔色 */
   --radius: 20px;
+  --ease: cubic-bezier(0.4, 0.4, 0, 1); /* 速く動き出して、ゆっくり止まる動き */
 }
 
 /* ===== 全体の設定 ===== */
@@ -21,6 +22,7 @@ html {
 }
 
 body {
+  position: relative; /* 歩くカカポの通り道（walk-track）の基準にする */
   margin: 0;
   background: var(--bg);
   color: var(--ink);
@@ -68,15 +70,31 @@ h3 {
   opacity: 0.4;
 }
 
-/* ===== ヘッダー ===== */
+/* ===== ヘッダー（画面の上に固定） ===== */
 .site-header {
+  position: sticky; /* スクロールしても、画面の上にくっついて残る */
+  top: 0;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 20px 24px;
+  /* 背景は画面いっぱい、中身は 1080px の幅にそろえる */
+  padding: 14px max(24px, calc((100% - 1080px) / 2 + 24px));
+  background: rgba(247, 242, 230, 0.85);
+  backdrop-filter: blur(8px); /* 後ろをすりガラスのようにぼかす */
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 0.3s var(--ease);
+}
+
+/* 少しスクロールしたら、下に線を出す（JS で is-scrolled を付ける） */
+.site-header.is-scrolled {
+  border-bottom-color: var(--ink);
+}
+
+/* 固定ヘッダーに見出しが隠れないように、ジャンプ先を少し下にずらす */
+section {
+  scroll-margin-top: 72px;
 }
 
 .logo {
@@ -198,6 +216,45 @@ h3 {
 }
 
 .bubble.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== ページを開いたときに、トップが順番に現れる ===== */
+.hero-text > *,
+.hero-kakapo {
+  opacity: 0;
+  animation: fade-up 0.9s var(--ease) forwards;
+}
+
+.hero-text > :nth-child(1) { animation-delay: 0.1s; }
+.hero-text > :nth-child(2) { animation-delay: 0.25s; }
+.hero-text > :nth-child(3) { animation-delay: 0.4s; }
+.hero-text > :nth-child(4) { animation-delay: 0.55s; }
+.hero-kakapo { animation-delay: 0.7s; }
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== スクロールで、ふわっと現れる ===== */
+/* 最初は透明で少し下。JS が is-visible を付けると、元の位置に現れる */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.8s var(--ease) var(--delay, 0s),
+    transform 0.8s var(--ease) var(--delay, 0s);
+}
+
+.reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -416,16 +473,86 @@ a.work-thumb:hover img {
   color: var(--muted);
 }
 
+/* ===== スクロールで歩くカカポと足跡 ===== */
+/* ページの右はしに、上から下まで続く「通り道」 */
+.walk-track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 24px;
+  width: 44px;
+  z-index: 10;
+  pointer-events: none; /* クリックのじゃまをしない */
+}
+
+.walker {
+  position: absolute;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+/* トップ画面を過ぎたら出てくる */
+.walker.is-out {
+  opacity: 1;
+}
+
+/* スクロールしている間だけ、よちよち左右にゆれる */
+.walker.is-walking {
+  animation: waddle 0.36s ease-in-out infinite;
+}
+
+@keyframes waddle {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+
+/* 足跡（JS で1つずつ置いていく） */
+.footprint {
+  position: absolute;
+  width: 12px;
+  height: 14px;
+  animation: footprint-in 0.4s var(--ease);
+}
+
+@keyframes footprint-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+/* ===== 右の余白が狭い画面（幅 1180px 以下）のとき ===== */
+/* カカポを小さくして、画面の右はしに「カカポ専用の通り道」を空ける */
+@media (max-width: 1180px) {
+  .walk-track {
+    right: 4px;
+    width: 28px;
+  }
+
+  .walker {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* 左右の余白を広げて、カードが通り道にかからないようにする */
+  .section {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
 /* ===== スマホ（幅 720px 以下）のとき ===== */
 @media (max-width: 720px) {
   .site-header {
-    flex-direction: column;
-    gap: 8px;
+    padding: 10px 16px;
   }
 
   .nav {
-    gap: 20px;
-    font-size: 15px;
+    gap: 14px;
+    font-size: 14px;
   }
 
   .hero {
@@ -460,6 +587,14 @@ a.work-thumb:hover img {
   }
 }
 
+/* ===== とても狭いスマホ（幅 480px 以下）のとき ===== */
+@media (max-width: 480px) {
+  /* ロゴの文字を隠して、カカポのアイコンだけにする（メニューを1行に収めるため） */
+  .logo span {
+    display: none;
+  }
+}
+
 /* 動きを減らす設定の人には、アニメーションを止める */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -471,5 +606,18 @@ a.work-thumb:hover img {
 
   html {
     scroll-behavior: auto;
+  }
+
+  /* 最初から全部見えている状態にする */
+  .hero-text > *,
+  .hero-kakapo,
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* 歩くカカポは出さない */
+  .walk-track {
+    display: none;
   }
 }

@@ -7,6 +7,14 @@
   <meta name="description" content="飛べない鳥は、コツコツ歩く。ブラウザゲーム、クイズ・診断コンテンツ、Webサイトを制作する kakapo のポートフォリオです。">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
+  <!-- OGP（SNSでURLを共有したときの表示） -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="kakapo studio">
+  <meta property="og:description" content="飛べない鳥は、コツコツ歩く。ブラウザゲーム、クイズ・診断コンテンツ、Webサイトを制作しています。">
+  <meta property="og:url" content="https://kakapo-studio.github.io/">
+  <meta property="og:image" content="https://kakapo-studio.github.io/images/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- フォント（Google Fonts・無料） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +24,8 @@
 </head>
 <body>
 
-  <!-- ===== ヘッダー ===== -->
-  <header class="site-header">
+  <!-- ===== ヘッダー（画面の上に固定） ===== -->
+  <header class="site-header" id="header">
     <a class="logo" href="#top">
       <img src="images/kakapo.svg" alt="" width="36" height="36">
       <span>kakapo studio</span>
@@ -71,12 +79,14 @@
     </section>
 
     <!-- ===== 作品 ===== -->
+    <!-- class="reveal" が付いたものは、スクロールで見えたときにふわっと現れる -->
+    <!-- style="--delay: 0.1s" は、現れるまでの待ち時間（時間差をつけるため） -->
     <section class="section" id="works">
-      <h2 class="section-title">Works<span>作品</span></h2>
+      <h2 class="section-title reveal">Works<span>作品</span></h2>
 
       <div class="works-grid">
 
-        <article class="work-card">
+        <article class="work-card reveal">
           <a class="work-thumb" href="https://kakapo-studio.github.io/quiz-game/">
             <img src="images/works/quiz-game.png" alt="日本の地理クイズの紹介画像" width="1200" height="630" loading="lazy">
           </a>
@@ -94,7 +104,7 @@
           </div>
         </article>
 
-        <article class="work-card">
+        <article class="work-card reveal" style="--delay: 0.1s">
           <a class="work-thumb" href="#top">
             <img src="images/works/portfolio.png" alt="kakapo studio のトップページ" width="1200" height="630" loading="lazy">
           </a>
@@ -110,7 +120,7 @@
           </div>
         </article>
 
-        <article class="work-card is-soon">
+        <article class="work-card is-soon reveal" style="--delay: 0.2s">
           <div class="work-thumb soon-thumb">
             <img src="images/kakapo.svg" alt="" width="96" height="96">
             <p>制作中…</p>
@@ -129,10 +139,10 @@
 
     <!-- ===== できること ===== -->
     <section class="section" id="service">
-      <h2 class="section-title">Service<span>できること</span></h2>
+      <h2 class="section-title reveal">Service<span>できること</span></h2>
 
       <div class="service-grid">
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true">
             <rect x="4" y="14" width="40" height="22" rx="11"/>
             <path d="M14 21 v8 M10 25 h8"/>
@@ -143,7 +153,7 @@
           <p>インストール不要で、URLを開くだけで遊べるミニゲームを作ります。スマホにも対応します。</p>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal" style="--delay: 0.1s">
           <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true">
             <circle cx="15" cy="24" r="8"/>
             <path d="M29 16 l14 16 M43 16 l-14 16"/>
@@ -152,7 +162,7 @@
           <p>キャンペーンや集客に使えるクイズ・診断ページを作ります。問題や結果は、あとから差し替えやすい作りにします。</p>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal" style="--delay: 0.2s">
           <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true">
             <rect x="4" y="8" width="40" height="32" rx="4"/>
             <path d="M4 16 h40"/>
@@ -168,9 +178,9 @@
 
     <!-- ===== 自己紹介 ===== -->
     <section class="section" id="about">
-      <h2 class="section-title">About<span>わたしについて</span></h2>
+      <h2 class="section-title reveal">About<span>わたしについて</span></h2>
 
-      <div class="about">
+      <div class="about reveal">
         <img class="about-icon" src="images/kakapo.svg" alt="kakapo のアイコン" width="160" height="160">
         <div class="about-text">
           <h3>kakapo<span>（カカポ）</span></h3>
@@ -188,10 +198,10 @@
 
     <!-- ===== お問い合わせ ===== -->
     <section class="section contact" id="contact">
-      <h2 class="section-title">Contact<span>お問い合わせ</span></h2>
-      <p>制作のご相談・ご依頼は、フォームからお気軽にどうぞ。</p>
+      <h2 class="section-title reveal">Contact<span>お問い合わせ</span></h2>
+      <p class="reveal" style="--delay: 0.1s">制作のご相談・ご依頼は、フォームからお気軽にどうぞ。</p>
       <!-- Google フォームの URL ができたら、href="" の中に入れる -->
-      <a class="button is-disabled" href="" aria-disabled="true">お問い合わせフォーム（準備中）</a>
+      <a class="button is-disabled reveal" style="--delay: 0.2s" href="" aria-disabled="true">お問い合わせフォーム（準備中）</a>
     </section>
 
   </main>
@@ -199,6 +209,11 @@
   <footer class="site-footer">
     <p>&copy; 2026 kakapo studio</p>
   </footer>
+
+  <!-- ===== スクロールで歩くカカポと足跡（飾りなので読み上げない） ===== -->
+  <div class="walk-track" id="walkTrack" aria-hidden="true">
+    <img class="walker" id="walker" src="images/kakapo.svg" alt="" width="44" height="44">
+  </div>
 
   <script src="script.js"></script>
 </body>
