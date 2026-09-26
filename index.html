@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kakapo studio | ブラウザゲーム・クイズ・Webサイト制作</title>
+  <meta name="description" content="飛べない鳥は、コツコツ歩く。ブラウザゲーム、クイズ・診断コンテンツ、Webサイトを制作する kakapo のポートフォリオです。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- フォント（Google Fonts・無料） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="site-header">
+    <a class="logo" href="#top">
+      <img src="images/kakapo.svg" alt="" width="36" height="36">
+      <span>kakapo studio</span>
+    </a>
+    <nav class="nav">
+      <a href="#works">Works</a>
+      <a href="#service">Service</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== トップ ===== -->
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <p class="hero-label">Browser Game / Quiz / Web</p>
+        <h1>飛べない鳥は、<br>コツコツ歩く。</h1>
+        <p class="hero-lead">ブラウザゲーム、クイズ・診断コンテンツ、Webサイトを<br class="pc-only">ひとつずつ、ていねいに作っています。</p>
+        <a class="button" href="#works">作品を見る</a>
+      </div>
+
+      <div class="hero-kakapo">
+        <p class="bubble" id="bubble" aria-live="polite"></p>
+        <button class="kakapo-button" id="kakapo" type="button" aria-label="カカポをつつく">
+          <svg viewBox="0 0 160 160" aria-hidden="true">
+            <ellipse cx="80" cy="88" rx="52" ry="56" fill="#cfe0a8"/>
+            <ellipse cx="80" cy="78" rx="40" ry="32" fill="#f6efc4"/>
+            <path d="M74 84 Q80 80 86 84 Q85 94 80 98 Q75 94 74 84 Z" fill="#ffffff"/>
+            <g fill="none" stroke="#2b2a26" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M60 142 l-4 7 M66 144 v7 M72 142 l4 7 M88 142 l-4 7 M94 144 v7 M100 142 l4 7"/>
+              <ellipse cx="80" cy="88" rx="52" ry="56"/>
+              <path d="M29 84 Q14 100 30 116 M131 84 Q146 100 130 116"/>
+              <path d="M67 34 Q70 24 74 33 M86 33 Q90 24 93 34"/>
+              <ellipse cx="80" cy="78" rx="40" ry="32"/>
+              <path d="M40 82 L28 78 M40 88 L28 90 M120 82 L132 78 M120 88 L132 90"/>
+              <path d="M74 84 Q80 80 86 84 Q85 94 80 98 Q75 94 74 84 Z"/>
+              <path d="M68 120 l4 4 l4 -4 M84 120 l4 4 l4 -4 M76 130 l4 4 l4 -4" stroke-width="2.5"/>
+              <path d="M48 94 l4 -6 M54 95 l4 -6 M102 95 l4 -6 M108 94 l4 -6" stroke="#d9837a" stroke-width="2"/>
+            </g>
+            <g class="eyes">
+              <circle cx="63" cy="74" r="8.5" fill="#2b2a26"/>
+              <circle cx="97" cy="74" r="8.5" fill="#2b2a26"/>
+              <circle cx="66" cy="71" r="3" fill="#ffffff"/>
+              <circle cx="100" cy="71" r="3" fill="#ffffff"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== 作品 ===== -->
+    <section class="section" id="works">
+      <h2 class="section-title">Works<span>作品</span></h2>
+
+      <div class="works-grid">
+
+        <article class="work-card">
+          <a class="work-thumb" href="https://kakapo-studio.github.io/quiz-game/">
+            <img src="images/works/quiz-game.png" alt="日本の地理クイズの紹介画像" width="1200" height="630" loading="lazy">
+          </a>
+          <div class="work-body">
+            <ul class="tags">
+              <li>game</li>
+              <li>content</li>
+            </ul>
+            <h3>日本の地理クイズ</h3>
+            <p>全10問の4択クイズ。出題の順番と選択肢が毎回変わります。問題データを差し替えるだけで、別テーマのクイズにできる作りです。</p>
+            <div class="work-links">
+              <a href="https://kakapo-studio.github.io/quiz-game/">遊ぶ</a>
+              <a href="https://github.com/kakapo-studio/quiz-game">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <a class="work-thumb" href="#top">
+            <img src="images/works/portfolio.png" alt="kakapo studio のトップページ" width="1200" height="630" loading="lazy">
+          </a>
+          <div class="work-body">
+            <ul class="tags">
+              <li>web</li>
+            </ul>
+            <h3>kakapo studio（このサイト）</h3>
+            <p>ポートフォリオサイト。キャラクターのデザインから、スマホ対応のレイアウトまで一から作りました。カカポをクリックすると…？</p>
+            <div class="work-links">
+              <a href="https://github.com/kakapo-studio/kakapo-studio.github.io">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card is-soon">
+          <div class="work-thumb soon-thumb">
+            <img src="images/kakapo.svg" alt="" width="96" height="96">
+            <p>制作中…</p>
+          </div>
+          <div class="work-body">
+            <ul class="tags">
+              <li>game</li>
+            </ul>
+            <h3>タイピングゲーム</h3>
+            <p>キーボードで遊ぶタイピングゲームを、コツコツ制作中です。</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== できること ===== -->
+    <section class="section" id="service">
+      <h2 class="section-title">Service<span>できること</span></h2>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="4" y="14" width="40" height="22" rx="11"/>
+            <path d="M14 21 v8 M10 25 h8"/>
+            <circle cx="32" cy="23" r="1.5"/>
+            <circle cx="36" cy="27" r="1.5"/>
+          </svg>
+          <h3>ブラウザゲーム制作</h3>
+          <p>インストール不要で、URLを開くだけで遊べるミニゲームを作ります。スマホにも対応します。</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="15" cy="24" r="8"/>
+            <path d="M29 16 l14 16 M43 16 l-14 16"/>
+          </svg>
+          <h3>クイズ・診断コンテンツ</h3>
+          <p>キャンペーンや集客に使えるクイズ・診断ページを作ります。問題や結果は、あとから差し替えやすい作りにします。</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="4" y="8" width="40" height="32" rx="4"/>
+            <path d="M4 16 h40"/>
+            <circle cx="9" cy="12" r="0.8"/>
+            <circle cx="13" cy="12" r="0.8"/>
+            <path d="M11 24 h16 M11 30 h26"/>
+          </svg>
+          <h3>Webサイト・LP制作</h3>
+          <p>お店や個人の紹介サイト、1ページの宣伝用ページ（LP）を作ります。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 自己紹介 ===== -->
+    <section class="section" id="about">
+      <h2 class="section-title">About<span>わたしについて</span></h2>
+
+      <div class="about">
+        <img class="about-icon" src="images/kakapo.svg" alt="kakapo のアイコン" width="160" height="160">
+        <div class="about-text">
+          <h3>kakapo<span>（カカポ）</span></h3>
+          <p>ニュージーランドにすむ、飛べないオウム「カカポ」から名前をもらいました。飛べないかわりに、コツコツ歩いて進むのが得意です。</p>
+          <p>HTML・CSS・JavaScript を使って、ブラウザで遊べるゲームやクイズ、Webサイトを制作しています。</p>
+          <ul class="skills">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Git / GitHub</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== お問い合わせ ===== -->
+    <section class="section contact" id="contact">
+      <h2 class="section-title">Contact<span>お問い合わせ</span></h2>
+      <p>制作のご相談・ご依頼は、フォームからお気軽にどうぞ。</p>
+      <!-- Google フォームの URL ができたら、href="" の中に入れる -->
+      <a class="button is-disabled" href="" aria-disabled="true">お問い合わせフォーム（準備中）</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 kakapo studio</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

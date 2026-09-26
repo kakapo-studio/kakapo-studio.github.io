@@ -1,0 +1,475 @@
+/* ===== 色やサイズの「変数」 ===== */
+/* ここを変えると、サイト全体の色がまとめて変わります */
+:root {
+  --ink: #2b2a26;        /* 文字・線（カカポの線と同じ色） */
+  --muted: #6b675c;      /* 少し薄い文字 */
+  --bg: #f7f2e6;         /* 背景（生成り） */
+  --card: #fffdf7;       /* カードの背景 */
+  --green: #cfe0a8;      /* カカポの体の色 */
+  --yellow: #f6efc4;     /* カカポの顔の色 */
+  --accent: #4a6b22;     /* リンクなどに使う濃い苔色 */
+  --radius: 20px;
+}
+
+/* ===== 全体の設定 ===== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* ページ内リンクで、するっとスクロール */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Zen Maru Gothic", "Yu Gothic UI", "Meiryo", sans-serif;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ===== ボタン ===== */
+.button {
+  display: inline-block;
+  padding: 14px 32px;
+  color: var(--bg);
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.button:hover {
+  color: var(--ink);
+  background: transparent;
+  transform: translateY(-2px);
+}
+
+.button.is-disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ===== ヘッダー ===== */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* ===== トップ ===== */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 40px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+
+.hero-label {
+  margin: 0 0 12px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.hero h1 {
+  margin: 0 0 24px;
+  font-size: clamp(36px, 6vw, 64px);
+}
+
+.hero-lead {
+  margin: 0 0 32px;
+  color: var(--muted);
+}
+
+.hero-kakapo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* カカポのボタン（押せるけど、ボタンらしい見た目は消す） */
+.kakapo-button {
+  width: min(320px, 70vw);
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: float 3s ease-in-out infinite;
+}
+
+.kakapo-button svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ゆらゆら浮かぶ動き */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* まばたき */
+.eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 4s infinite;
+}
+
+@keyframes blink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  97% { transform: scaleY(0.1); }
+}
+
+/* クリックしたときのジャンプ */
+.kakapo-button.hop {
+  animation: hop 0.5s ease;
+}
+
+@keyframes hop {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-28px) rotate(-4deg); }
+}
+
+/* ふきだし */
+.bubble {
+  position: absolute;
+  top: -8px;
+  right: 8%;
+  margin: 0;
+  padding: 8px 16px;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.bubble.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== セクション共通 ===== */
+.section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin: 0 0 32px;
+  font-size: 40px;
+}
+
+.section-title span {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ===== 作品 ===== */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+}
+
+.work-thumb {
+  display: block;
+  aspect-ratio: 1200 / 630;
+  overflow: hidden;
+  border-bottom: 2px solid var(--ink);
+}
+
+.work-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+a.work-thumb:hover img {
+  transform: scale(1.04);
+}
+
+.work-body {
+  padding: 20px 24px 24px;
+}
+
+.work-body h3 {
+  margin: 8px 0;
+  font-size: 20px;
+}
+
+.work-body p {
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.tags,
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li,
+.skills li {
+  padding: 2px 12px;
+  font-size: 13px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+}
+
+.work-links {
+  display: flex;
+  gap: 16px;
+}
+
+.work-links a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* 制作中のカード */
+.work-card.is-soon {
+  border-style: dashed;
+}
+
+.soon-thumb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--yellow);
+  border-bottom-style: dashed;
+}
+
+.soon-thumb img {
+  width: 96px;
+  height: 96px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.soon-thumb p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+/* ===== できること ===== */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  padding: 28px 24px;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.service-card h3 {
+  margin: 12px 0 8px;
+  font-size: 19px;
+}
+
+.service-card p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* ===== 自己紹介 ===== */
+.about {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.about-icon {
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  padding: 12px;
+  background: var(--green);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+
+.about-text h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.about-text h3 span {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.about-text p {
+  margin: 0 0 12px;
+}
+
+.skills {
+  margin-top: 16px;
+}
+
+/* ===== お問い合わせ ===== */
+.contact {
+  text-align: center;
+}
+
+.contact .section-title {
+  justify-content: center;
+}
+
+.contact p {
+  margin: 0 0 24px;
+}
+
+/* ===== フッター ===== */
+.site-footer {
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ===== スマホ（幅 720px 以下）のとき ===== */
+@media (max-width: 720px) {
+  .site-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav {
+    gap: 20px;
+    font-size: 15px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 32px 24px 64px;
+    text-align: center;
+  }
+
+  .hero-kakapo {
+    order: -1; /* スマホではカカポを文字より上に */
+  }
+
+  .kakapo-button {
+    width: min(200px, 55vw);
+  }
+
+  .pc-only {
+    display: none;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .skills {
+    justify-content: center;
+  }
+}
+
+/* 動きを減らす設定の人には、アニメーションを止める */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
